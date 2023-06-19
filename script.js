@@ -8,12 +8,15 @@ const score1El = document.querySelector('#score--1');
 const diceEl = document.querySelector('.dice');
 const currentScore0El = document.querySelector('#current--0');
 const currentScore1El = document.querySelector('#current--1');
+const modalEl = document.querySelector('.modal');
+const overlayEl = document.querySelector('.overlay');
 
 // buttons
 const btnRules = document.querySelector('.btn--rules');
 const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
+const btnModal = document.querySelector('.close-modal');
 
 // Starting conditions
 
@@ -80,7 +83,7 @@ function addToScore() {
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
 
-    if (scores[activePlayer] >= 20) {
+    if (scores[activePlayer] >= 50) {
       playing = false;
       diceEl.classList.add('hidden');
       document
@@ -95,7 +98,26 @@ function addToScore() {
   }
 }
 
+function openModal() {
+  modalEl.classList.remove('hidden');
+  overlayEl.classList.remove('hidden');
+}
+
+function closeModal() {
+  modalEl.classList.add('hidden');
+  overlayEl.classList.add('hidden');
+}
+
 /******************* Event listeners */
 btnRoll.addEventListener('click', rollTheDice);
 btnHold.addEventListener('click', addToScore);
 btnNew.addEventListener('click', newGame);
+btnRules.addEventListener('click', openModal);
+btnModal.addEventListener('click', closeModal);
+overlayEl.addEventListener('click', closeModal);
+
+document.addEventListener('keyup', function (event) {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+});
