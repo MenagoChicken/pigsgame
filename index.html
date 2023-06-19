@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Pig Game</title>
+  </head>
+  <body>
+    <main>
+      <section class="player player--0 player--active">
+        <h2 class="name" id="name--0">Player 1</h2>
+        <p class="score" id="score--0">43</p>
+        <div class="current">
+          <p class="current-label">Current</p>
+          <p class="current-score" id="current--0">0</p>
+        </div>
+      </section>
+      <section class="player player--1">
+        <h2 class="name" id="name--1">Player 2</h2>
+        <p class="score" id="score--1">24</p>
+        <div class="current">
+          <p class="current-label">Current</p>
+          <p class="current-score" id="current--1">0</p>
+        </div>
+      </section>
+
+      <div class="modal hidden">
+        <button class="close-modal">&times;</button>
+        <h1>
+          The game of Pigs is a dice game with simple rules. Here are the basic
+          rules of the game:
+        </h1>
+        <ul>
+          <li>The game is played with two players taking turns. On each turn, a
+          player rolls a dice. </li><li>The player accumulates points based on the sum of
+          the dice rolls.</li> If the player rolls a 1 on the dice, their turn ends,
+          and they lose all points accumulated in that turn. - It's called
+          "pigging out."</li><li> If the player rolls any other number, they can choose
+          to roll again and add to their current points, or they can end their
+          turn and bank their accumulated points. </li><li>The player can continue
+          rolling as long as they avoid rolling a 1 or choose to stop and bank
+          their points.</li><li> The first player to reach a winning point total (50)
+          wins the game.</li>
+        </ul>
+      </div>
+      <div class="overlay hidden"></div>
+
+      <img src="./img/dice-1.png" alt="Playing dice" class="dice" />
+      <button class="btn btn--rules">📄 Rules</button>
+      <button class="btn btn--new">🔄 New game</button>
+      <button class="btn btn--roll">🎲 Roll dice</button>
+      <button class="btn btn--hold">📥 Hold</button>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
