@@ -19,6 +19,7 @@ const btnHold = document.querySelector('.btn--hold');
 score0El.textContent = 0;
 score1El.textContent = 0;
 diceEl.classList.add('hidden');
+let playing = true;
 
 const scores = [0, 0];
 let currentScore = 0;
@@ -33,35 +34,41 @@ function ganarateRandomNumber() {
 
 //Display the dice
 function rollTheDice() {
-  const dice = ganarateRandomNumber();
-  if (diceEl.classList.contains('hidden')) {
-    diceEl.classList.remove('hidden');
-  }
-  diceEl.setAttribute('src', `./img/dice-${dice}.png`);
+  if (playing) {
+    const dice = ganarateRandomNumber();
+    if (diceEl.classList.contains('hidden')) {
+      diceEl.classList.remove('hidden');
+    }
+    diceEl.setAttribute('src', `./img/dice-${dice}.png`);
 
-  if (dice !== 1) {
-    currentScore += dice;
-    document.getElementById(`current--${activePlayer}`).textContent =
-      currentScore;
-  } else {
-    switchPlayer();
+    if (dice !== 1) {
+      currentScore += dice;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
+    } else {
+      switchPlayer();
+    }
   }
 }
 
 function addToScore() {
-  scores[activePlayer] += currentScore;
-  document.getElementById(`score--${activePlayer}`).textContent =
-    scores[activePlayer];
+  if (playing) {
+    scores[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
 
-  if (scores[activePlayer] >= 20) {
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.add('player--winner');
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.remove('player--active');
-  } else {
-    switchPlayer();
+    if (scores[activePlayer] >= 20) {
+      playing = false;
+      diceEl.classList.add('hidden');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    } else {
+      switchPlayer();
+    }
   }
 }
 
@@ -76,6 +83,5 @@ function switchPlayer() {
 }
 
 /******************* Event listeners */
-// ROLL DICE
 btnRoll.addEventListener('click', rollTheDice);
 btnHold.addEventListener('click', addToScore);
